@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.blog.modules.app.dao.ArticleDao">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.example.blog.modules.app.entity.ArticleEntity" id="artMap">
+        <result property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="createTime" column="create_time"/>
+        <result property="tag" column="tag"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+
+    <select id="pageList" resultMap="artMap">
+        select id,title,content,update_time,create_time,tag,remark from article
+        where 1=1
+
+        <if test="form.userId != null and form.userId.trim() != ''">
+            AND u_id= #{form.userId}
+        </if>
+
+    </select>
+
+
+</mapper>
